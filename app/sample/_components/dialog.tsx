@@ -10,6 +10,7 @@ interface A11yDialogProps {
   children: React.ReactNode;
 }
 
+// フォーカス可能要素
 const focusableSelector = [
   "[tabindex]:not([tabindex='-1'])",
   "input",
@@ -84,7 +85,10 @@ export const A11yDialog = ({
   }
   return (
     <div>
-      {/* フォーカストラップ（閉じるボタンにフォーカスを渡す） */}
+      {/* オーバーレイ */}
+      <div onClick={onClose}></div>
+
+      {/* フォーカストラップ（ダイアログ最下部フォーカス可能要素にフォーカスを渡す） */}
       <div
         onFocus={() => {
           lastFocusableElementRef.current?.focus();
@@ -112,7 +116,7 @@ export const A11yDialog = ({
         </div>
         {children}
       </div>
-      {/* フォーカストラップ（見出し要素にフォーカスを渡す） */}
+      {/* フォーカストラップ（ダイアログ最上部フォーカス可能要素にフォーカスを渡す） */}
       <div
         onFocus={() => {
           closeBtnRef.current?.focus();
